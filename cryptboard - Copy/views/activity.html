@@ -1,0 +1,41 @@
+<div id="projects">
+    <div class="containerWelcome">
+        <div class="screemnCenter">
+            <div style="text-align: center" ng-show="loading"> <img src="../../preloader.gif"></div>
+            <p  ng-show="!loading" style="text-align: center"><button ng-click="getActivities()" class="waves-effect waves-light red lighten-3 btn">Refresh</button>   </p>
+            <div ng-show="!loading" class="search-wrapper">
+                <input type="text" class="form-control" placeholder="Search by user, action or anything" ng-model="searchkey">
+                <span id="search-icon"><i class="material-icons">search</i></span>
+            </div>
+            <div ng-show="!loading" class="smart-search-stats">
+                <table class="bordered responsive">
+                    <thead>
+                    <t>
+                        <th> <a href="" ng-click="sortType = 'user';
+                                    sortReverse = !sortReverse">User</a></th>
+                        <th><a href="" ng-click="sortType = 'clientid';
+                                    sortReverse = !sortReverse">User ID</a></th>
+                        <th><a href="" ng-click="sortType = 'action';
+                                    sortReverse = !sortReverse">Action</a></th>
+                        <th><a href="" ng-click="sortType = 'browser';
+                                    sortReverse = !sortReverse">Browser</a></th>
+                        <th><a href="" ng-click="sortType = 'os';
+                                    sortReverse = !sortReverse">Operating System</a></th>
+                        <th><a href="" ng-click="sortType = 'time';
+                                    sortReverse = !sortReverse">Time</a></th>
+                        </tr>
+                        </thead>
+                        <tr ng-repeat="activity in activities| orderBy:sortType:sortReverse | filter:searchkey">
+                            <td>{{activity.user}}</td>
+                            <td>{{activity.clientid}}</td>
+                            <td>{{activity.activity}}</td>
+                            <td>{{activity.browser}}</td>
+                            <td>{{activity.os}}</td>
+                            <td>{{activity.time}}</td>
+                        </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

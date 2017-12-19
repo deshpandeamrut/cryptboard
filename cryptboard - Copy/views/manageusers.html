@@ -1,0 +1,57 @@
+<div id="projects">
+    <div class="container">
+        <div class="screemnCenter">
+            <h4 style="text-align: center">Manage Users</h4>
+            <div class="search-wrapper">
+            <input type="text" class="form-control" placeholder="Search" ng-model="searchKey">
+                <span id="search-icon"><i class="material-icons">search</i></span>
+            </div>
+            <table class="bordered responsive">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Intranet ID</th>
+                        <th>Emp Code</th>
+                        <th>User Type</th>
+                        <th>Access List</th>
+                        <th>Email Notifications</th>
+                        <th>Edit/Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="u in users | filter:searchKey">
+                        <td> <img class="user-profile-pic" src="{{'http://faces.tap.ibm.com/imagesrv/' +u.empCode +'.jpg?s=50'}}"></td>
+                        <td ng-if="!u.edit">{{u.name}}</td>
+                        <td ng-if="u.edit"><input type="text" ng-model="u.name"></td>
+                        <td ng-if="!u.edit">{{u.intranetID}}</td>
+                        <td ng-if="u.edit"><input type="text" ng-model="u.intranetID"></td>
+                        <td ng-if="!u.edit">{{u.empCode}}</td>
+                        <td ng-if="u.edit"><input type="text" ng-model="u.empCode"></td>
+                        <td ng-if="!u.edit">{{u.userType}}</td>
+                        <td ng-if="u.edit"><input type="text" ng-model="u.userType"></td>
+                        <td ng-if="!u.edit">{{u.accessList}}</td>
+                        <td ng-if="u.edit"><input type="text" ng-model="u.accessList"></td>
+                        <td ng-if="!u.edit">{{u.emailNotification}}</td>
+                        <td ng-if="u.edit"><input type="text" ng-model="u.emailNotification"></td>
+                        <td>
+                              <i  ng-click="u.edit = true" ng-if="!u.edit" class="light material-icons">edit</i>
+                            <a class="waves-effect waves-light btn" ng-if="u.edit" ng-click="updateUser(u)">Update</a>
+                        </td>
+                        <td>
+                            <i  ng-click="deleteUser(u)" class="light material-icons">delete</i>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+      <div class="fixed-action-btn fab">
+    <a class="btn-floating btn-large red ">
+        <i class="large material-icons waves-effect" ng-click="addNewUserPrompt()">add</i>
+    </a>
+      </div>
+</div>
+

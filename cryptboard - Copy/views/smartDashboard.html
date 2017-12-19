@@ -1,0 +1,69 @@
+<div class="containe">
+	<div class="row flex">
+		<div ng-repeat="entry in dashboardData" class="fixed-width">
+			<div class="card">
+				<div class="card-image waves-effect waves-block waves-light">
+					<div class="background img2">
+						<div class="row">
+							<div class="stats">
+								<div class="col s 12 number-wrapper">
+									Buy <span class="number-big">{{entry.buy | currencyFilter}}</span><span>({{entry.difference}})</span>
+								</div>
+								<div class="col s 12 number-wrapper">
+									Sell <span class="number-big">{{entry.sell |currencyFilter}} </span>
+								</div>
+								<div class="col s 12 number-wrapper">
+									Trade Volume <span class="number-big">{{entry.volume}} </span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-content">
+					<span class="card-title activator grey-text text-darken-4">{{entry.name}}<i class="material-icons right">more_vert</i></span>
+				</div>
+				<div class="card-reveal">
+					<span class="card-title grey-text text-darken-4">{{entry.name}}<i class="material-icons right">close</i></span>
+					<div class="col s 12 number-wrapper">
+						Highest Today<span class="number-big">{{entry.max_24hrs | currencyFilter}} </span>
+					</div>
+					<div class="col s 12 number-wrapper">
+						Lowest Today<span class="number-big">{{entry.min_24hrs | currencyFilter}} </span>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="fixed-width-graph">
+			<div class="card">
+				<div class="card-image waves-effect waves-block waves-light">
+					<div   ng-if = "isChart" google-chart chart="myChartObject" style="height:100%; width:100%;" class="graph-wrapper"></div>
+				</div>
+				<div class="card-content">
+					<span class="card-title activator grey-text text-darken-4">Zebpay Bitcoin Trend<i class="material-icons right">more_vert</i></span>
+					<p><a href="#graphs">More Details</a></p>
+				</div>
+				
+			</div>
+		</div>
+		<div class="card feed">
+			<div class="card-image waves-effect waves-block waves-light">
+				<div class="background">
+					
+					<ul class="collection">
+						<li ng-repeat="item in feed" class="collection-item avatar">
+							<img class="circle" src="{{item.urlToImage}}" alt="Image">
+							<span class="title"><a href="{{item.url}}">{{item.title}}</a></span>
+							<!-- <p>{{}}</p> -->
+							<!-- <a href="{{item.url}}" target="_new" class="secondary-content"><i class="material-icons">grade</i></a> -->
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="card-content">
+				<span class="card-title activator grey-text text-darken-4">Bitcoin News</span>
+			</div>
+		</div>
+	</div>
+</div>

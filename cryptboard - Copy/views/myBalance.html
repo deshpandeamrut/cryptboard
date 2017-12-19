@@ -1,0 +1,224 @@
+<div id="projects">
+  <div class="container">
+
+    <div class="screemnCenter">
+
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="first_name" type="text" ng-model="name">
+          <label for="first_name">username</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="last_name" type="password" ng-model="pin">
+          <label for="last_name">pin</label>
+        </div>
+      </div>
+
+      <div class="form-group center">
+       <a class="waves-effect waves-light btn"  ng-click="getMyBalance()">View Investments</a>
+     </div>
+     <div ng-show="isInvalidCredentials" class="center">Invalid Credentials</div>
+     <div ng-show="isLoading" class="center">Loading...</div>
+     <div ng-show="login">
+      <!-- Add new Investment here -->
+      <div class="addNewInvestment" ng-if="newInvestment.edit">
+        <h5>Add a new Investment</h5>
+        <div class="row">
+
+          <div class="col s2">
+            <label>Select Exchange</label>
+            <select  class="browser-default" ng-model="newInvestment.exhangeName">
+              <option value="" disabled selected>Choose your option</option>
+              <option ng-repeat="exchange in exchangesOption" value="{{exchange}}">{{exchange}}</option>
+            </select>
+          </div>
+          <div class="col s2" ng-if="newInvestment.exhangeName=='koinex'">
+            <label>Select Coin Type</label>
+            <select  class="browser-default" ng-model="newInvestment.coinType">
+              <option value="" disabled selected>Choose your option</option>
+              <option ng-repeat="coin in coinsOption" value="{{exchange}}">{{coin}}</option>
+            </select>
+          </div>
+          <div class="input-field col s2">
+            <input  id="investment_amount" type="text" ng-model="newInvestment.investmentAmount">
+            <label for="investment_amount">Investment Amount</label>
+          </div>
+          <div class="input-field col s3">
+            <input   id="buyPrice" type="text" ng-model="newInvestment.buyPrice">
+            <label for="buyPrice">Buying Price</label>
+          </div>
+          <div class="input-field col s2">
+           <input required type="text" class="datepicker" ng-model="newInvestment.doi">
+           <label for="buyDate">Date of Investment</label>
+         </div>
+         <a class="waves-effect waves-light btn"  ng-click="addToMyInvestments()">Add</a>
+       </div>
+     </div>
+     <!-- End  -->
+     <h4 style="text-align: center">My Investments</h4>    
+
+     <div class="row">
+      <div class="col s6">
+        <div  ng-if="balanceData.zebpay.total_investments">
+          <h5>Zebpay</h5>
+          <!--  Zebpay Current Price: {{zebpay.currentPrice  | currencyFilter}} <br/> -->
+          Investments = {{balanceData.zebpay.total_investments}} <br/>
+          Current Value = {{balanceData.zebpay.currentValue}} | Zebpay Profit = {{balanceData.zebpay.difference}}
+        </div>
+        <div class=""  ng-if="balanceData.koinex.total_investments">
+          <h5>Koinex</h5>
+          <!--   Koinex Current Price: {{koinex.currentPrice | currencyFilter}} <br/> -->
+          Koinex Investments = {{balanceData.koinex.total_investments}} <br/>
+          Koinex Current Value = {{balanceData.koinex.currentValue}} | Koinex Profit = {{balanceData.koinex.difference}}
+        </div>
+        <hr/>
+        <div class="">
+          <p>
+            Total Investments = {{balanceData.koinex.total_investments + balanceData.zebpay.total_investments}} <br/>
+            Total Value = {{balanceData.koinex.currentValue + balanceData.zebpay.currentValue}} | Profit = {{balanceData.koinex.difference + balanceData.zebpay.difference}}
+          </p>
+        </div>
+      </div>
+      <div class="col s6">
+        <!-- Graph Wrapper -->
+        <div ng-if="isChartLoaded" google-chart chart="investmentChart" style="height:350px; width:100%;" class="graph-wrapper"></div>
+        <div ng-if="!isChartLoaded" class="center">Rendering Graph...</div>
+        <div ng-if="!isChartDataAvailable" class="center">Seems like, there is no data to draw!</div>
+      </div>
+    </div>
+    <hr/>
+    <div ng-if="balanceData.zebpay.total_investments">
+      <h5 class="center">ZebPay Investments</h5>
+      <table class="bordered responsive-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Exchange</th>
+            <th>Investment</th>
+            <th>Rate</th>
+            <th>Bits</th>
+            <th>Current Value</th>
+            <th>Difference</th>
+            <th>Percentage Rise/Fall</th>
+          </tr>
+        </thead>
+
+        <tbody>
+         <tr ng-repeat = "row in balanceData.zebpay.investments">
+          <td>{{row.doi}}</td>
+          <td>{{row.name}}</td>
+          <td>{{row.investment}}</td>
+          <td>{{row.price}}</td>
+          <td>{{row.bits}}</td>
+          <td>{{row.currentValue}}</td>
+          <td>{{row.difference}}</td>
+          <td>{{(row.difference/row.investment)*100 | number}}%</td>
+        </tr>
+      </tbody>
+
+      <hr/>
+    </table>
+  </div>
+  <div ng-if="balanceData.koinex.total_investments">
+    <h5 class="center">Koinex investments</h5>
+    <table class="bordered responsive-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Coin</th>
+          <th>Investment</th>
+          <th>Rate</th>
+          <th>Bits</th>
+          <th>Current Value</th>
+          <th>Difference</th>
+          <th>Percentage Rise/Fall</th>
+        </tr>
+      </thead>
+
+
+      <tbody ng-repeat="(coin,value) in balanceData.koinex.investments">
+       <tr ng-repeat="row in value">
+        <td>{{row.doi}}</td>
+        <td>{{row.name}}</td>
+        <td>{{row.investment}}</td>
+        <td>{{row.price}}</td>
+        <td>{{row.bits}}</td>
+        <td>{{row.currentValue}}</td>
+        <td>{{row.difference}}</td>
+        <td>{{(row.difference/row.investment)*100 | number}}%</td>
+      </tr>
+    </tbody>
+  </div>
+
+</table>
+</div>
+
+<h5 class="center">Coin Wise Stats</h5>
+<div class="row">
+  <div class="col s6">
+    <table class="bordered responsive-table">
+      <thead>
+        <tr>
+          <th>Coin</th>
+          <th>Investment</th>
+          <th>Profit</th>
+          <th>Current Value</th>
+          <th>Percentage Rise/Fall</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-if="balanceData.koinex.btc_total_investments">
+          <td>BTC</td>
+          <td>{{balanceData.koinex.btc_total_investments}}</td>
+          <td>{{balanceData.koinex.btc_difference}}</td>
+          <td>{{balanceData.koinex.btc_currentValue}}</td>
+          <td>{{(balanceData.koinex.btc_difference/balanceData.koinex.btc_total_investments) * 100 | number}}%</td>
+        </tr>
+        <tr ng-if="balanceData.koinex.bch_total_investments">
+          <td>BCH</td>
+          <td>{{balanceData.koinex.bch_total_investments}}</td>
+          <td>{{balanceData.koinex.bch_difference}}</td>
+          <td>{{balanceData.koinex.bch_currentValue}}</td>
+          <td>{{(balanceData.koinex.bch_difference/balanceData.koinex.bch_total_investments) * 100 | number}}%</td>
+        </tr>
+        <tr ng-if="balanceData.koinex.eth_total_investments">
+          <td>ETH</td>
+          <td>{{balanceData.koinex.eth_total_investments}}</td>
+          <td>{{balanceData.koinex.eth_difference}}</td>
+          <td>{{balanceData.koinex.eth_currentValue}}</td>
+          <td>{{(balanceData.koinex.eth_difference/balanceData.koinex.eth_total_investments) * 100 | number}}%</td>
+        </tr>
+        <tr ng-if="balanceData.koinex.xrp_total_investments">
+          <td>XRP</td>
+          <td>{{balanceData.koinex.xrp_total_investments}}</td>
+          <td>{{balanceData.koinex.xrp_difference}}</td>
+          <td>{{balanceData.koinex.xrp_currentValue}}</td>
+          <td>{{(balanceData.koinex.xrp_difference/balanceData.koinex.xrp_total_investments) * 100 | number}}%</td>
+        </tr>
+        <tr ng-if="balanceData.koinex.ltc_total_investments">
+          <td>LTC</td>
+          <td>{{balanceData.koinex.ltc_total_investments}}</td>
+          <td>{{balanceData.koinex.ltc_difference}}</td>
+          <td>{{balanceData.koinex.ltc_currentValue}}</td>
+          <td>{{(balanceData.koinex.ltc_difference/balanceData.koinex.ltc_total_investments) * 100 | number}}%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s6">
+    <!-- Graph Wrapper -->
+    <div ng-if="isChartLoaded" google-chart chart="myChartObject" style="height:350px; width:100%;" class="graph-wrapper"></div>
+    <div ng-if="!isChartLoaded" class="center">Rendering Graph...</div>
+    <div ng-if="!isChartDataAvailable" class="center">Seems like, there is no data to draw!</div>
+  </div>
+</div>
+
+</div>
+<div ng-show="login" class="fixed-action-btn fab">
+  <a class="btn-floating btn-large red ">
+    <i class="large material-icons waves-effect"  ng-click="addNewInvestment()">add</i>
+  </a>
+</div>
+
+

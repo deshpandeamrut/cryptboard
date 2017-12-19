@@ -1,0 +1,37 @@
+<div id="projects">
+    <div class="containerWelcome">
+        <div class="screemnCenter">
+            <div style="text-align: center" ng-show="loading"> <img src="../../preloader.gif"></div>
+            <div class="search-wrapper" ng-show="!loading">
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchkey">
+                <span id="search-icon"><i class="material-icons">search</i></span>
+            </div>
+            <p ng-show="!loading" style="text-align: center">Showing latest {{userDetails.length}} of {{usersCount}} total Users<br/></p>
+            <div ng-show="!loading" class="smart-search-stats">
+                <table class="bordered striped responsive">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Identified Name</th>
+                            <th>First Visited</th>
+                            <th>No. of times visited</th>
+                            <th>System Visited</th>
+                            <th>Activity</th>
+                            <th>User System Details</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="entry in userDetails | filter:searchkey track by $index">
+                        <td>{{entry.userid}}</td>
+                        <td>{{entry.user}}</td>
+                        <td>{{entry.firstVisit}}</td>
+                        <td>{{entry.totalVisits}}</td>
+                        <td><ul class="collection"><li class="collection-item" ng-repeat="(system, visits) in entry.sytemVisit track by $index">{{system}}:{{visits}}</li></ul></td>
+                        <td><ul class="collection"><li class="collection-item" ng-repeat="activity in entry.activities track by $index">{{activity}}</td>
+                        <td>{{entry.systemDetails}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
