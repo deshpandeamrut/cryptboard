@@ -1,1 +1,0 @@
-{"success":true,"count":9,"message":{"lastPrice":106600000,"timestamp":1512743625998,"bid":106605000,"ask":106890000,"fiatvolume":19300998369,"coinvolume":18027500000,"open":107000000,"high":113500000,"low":100600000},"time":1512743741991,"method":"Exchange Ticker","title":"/v1/exchange/ticker"}
