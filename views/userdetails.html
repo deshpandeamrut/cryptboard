@@ -1,0 +1,32 @@
+<div id="projects">
+    <div class="containerWelcome">
+        <div class="screemnCenter">
+            <div style="text-align: center" ng-show="loading"> Loading </div>
+            <div class="search-wrapper" ng-show="!loading">
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchkey">
+                <span id="search-icon"><i class="material-icons">search</i></span>
+            </div>
+           
+            <div ng-show="!loading" class="smart-search-stats">
+                <table class="bordered striped responsive">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>System</th>
+                            <th>Action</th>
+                            <th>TimeStamp</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="entry in userDetails | filter:searchkey track by $index">
+                        <td>{{entry.user}}</td>
+                        <td>{{entry.browser + entry.os}}</td>
+                        <td>{{entry.action}}</td>
+                        <td>{{entry.time}}</td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

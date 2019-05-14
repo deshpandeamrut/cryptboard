@@ -1,0 +1,21 @@
+<div class="container graph-container">
+	<div>
+		<h4>Trends <i class="material-icons">trending_up</i></h4>
+		<div class="center">
+			<div class="row">
+				<div class="col s4 m4 offset-m4 ">
+					<select ng-model ="coinType" class="browser-default uppercase" ng-change="drawChart()">
+						<option value="" disabled  selected>Choose a Coin</option> 
+						<option ng-repeat="coin in coinList" value="{{coin}}">{{coin}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div ng-if="isChartLoaded" google-chart chart="myChartObject" style="height:400px; width:100%;" class="graph-wrapper"></div>
+		<div ng-if="!isChartLoaded" class="center">Rendering Graph...</div>
+		<div ng-if="!isChartDataAvailable" class="center">Seems like, there is no data to draw!</div>
+	<!-- <div class="chartTools">
+	<a class="btn-flat" ng-disabled="myChartObject.type=='BarChart'" ng-click="renderChartType('BarChart')">Bar</a>
+	<a class="btn-flat" ng-click="renderChartType('LineChart')">Line</a>
+</div> -->
+</div>

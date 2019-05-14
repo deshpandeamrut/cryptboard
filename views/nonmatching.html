@@ -1,0 +1,19 @@
+<div id="projects">
+    <div class="containerWelcome">
+        <div class="screemnCenter">
+            <div class="nonmatching-keyword-wrapper flex">
+                <table class="bordered responsive">
+                    <tr>
+                        <th>Search key</th>
+                        <th>No. of times searched</th>
+                    </tr>
+                <tr ng-repeat="keyword in keywords">
+                    <td><a class="waves-effect waves-light red lighten-3 btn">{{keyword.keyword}}</a></td>
+                    <td><span>{{keyword.count}}</span></td
+                </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

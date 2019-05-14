@@ -1,0 +1,23 @@
+<div id="projects">
+    <div class="containerWelcome">
+        <div class="screemnCenter">
+        <div class="search-wrapper">
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchNoResult">
+                <span id="search-icon"><i class="material-icons">search</i></span>
+            </div>
+            <div class="nonmatching-keyword-wrapper flex">
+                <table class="bordered responsive">
+                    <tr>
+                        <th>Search key</th>
+                        <th>No. of times searched</th>
+                    </tr>
+                <tr ng-repeat="keyword in keywords | filter:searchNoResult">
+                    <td><a class="btn btn-flat">{{keyword.search}}</a></td>
+                    <td><span>{{keyword.count}}</span></td
+                </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

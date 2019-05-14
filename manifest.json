@@ -1,0 +1,16 @@
+{
+  "short_name": "Cryptboard",
+  "name": "Cryptboard",
+  "icons": [
+    {
+      "src": "cryptboard_logo.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#2F3B92",
+  "background_color": "#2F3B92"
+}

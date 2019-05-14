@@ -1,0 +1,21 @@
+<div>
+    <div class="containerWelcome">
+        <div class="screemnCenter">
+            <div class="flex">
+                <div class="exception-keyword-manager">
+                    <div class="" id="add-new-tag">
+                        <div><input type="text" class="add-tag-input" id="newkeyword" placeholder="Add Exception keyword"></div>
+                        <div><button class="btn btn-default" ng-click="addExceptionKeyword()">Add keyword</button></div>
+                    </div>
+                    <div id="divider"></div>
+                    <div class="" id="exception-keywords">
+                        <span ng-repeat="exceptionkeyword in exceptionKeywords track by $index">
+                            <button onclick="removekeyword('{{exceptionKeyword}}')" type='button' class="btn btn-default btn-lg tagbeta"> {{exceptionkeyword}}<span class='glyphicon glyphicon-remove remove-icon'> x</span> </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
