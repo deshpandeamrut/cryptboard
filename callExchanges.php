@@ -1,6 +1,8 @@
 
 <?php 
-
+/**
+* This script reads from each of the files ((<exchange_name>_api_data.json)) and returns only relevant data
+*/
 $properties = parse_ini_file("./php.ini", "true") or die("Could not find ini file");
 $exhangesPropertyFile = $properties['exchanges'];
 $exchanges = [];
@@ -27,22 +29,40 @@ foreach ($exchanges as $exchange) {
        $response['volume'] = floor($data->stats->BTC->vol_24hrs);
        $response['min_24hrs'] = floor($data->stats->inr->BTC->min_24hrs);
        $response['max_24hrs'] = floor($data->stats->inr->BTC->max_24hrs);
-       $btc['buy'] = floor($data->prices->inr->BTC);
+       
+	   $btc['buy'] = floor($data->prices->inr->BTC);
        $btc['sell'] = floor($data->prices->inr->BTC);
-       $ethereum['buy'] = floor($data->prices->inr->ETH);
+       $response['btc'] = $btc;
+	   
+	   $ethereum['buy'] = floor($data->prices->inr->ETH);
        $ethereum['sell'] = floor($data->prices->inr->ETH);
-       $bch['buy']= floor($data->prices->inr->BCH);
-       $bch['sell']= floor($data->prices->inr->BCH);
-        $ltc['buy']= floor($data->prices->inr->LTC);
-       $ltc['sell']= floor($data->prices->inr->LTC);
-        $xrp['buy']= $data->prices->inr->XRP;
-       $xrp['sell']= $data->prices->inr->XRP;
-        $response['btc'] = $btc;
        $response['eth'] = $ethereum;
-       $response['bch'] = $bch;
+	   
+	   $bsv['buy']= floor($data->prices->inr->BSV);
+       $bsv['sell']= floor($data->prices->inr->BSV);
+	   $response['bsv'] = $bsv;
+	   
+	   $bchabc['buy']= floor($data->prices->inr->BCHABC);
+       $bchabc['sell']= floor($data->prices->inr->BCHABC);
+	   $response['bchabc'] = $bchabc;
+	   
+       $ltc['buy']= floor($data->prices->inr->LTC);
+       $ltc['sell']= floor($data->prices->inr->LTC);
        $response['ltc'] = $ltc;
+	   
+	   $xrp['buy']= $data->prices->inr->XRP;
+       $xrp['sell']= $data->prices->inr->XRP;
        $response['xrp'] = $xrp;
-     }catch(Exception $e){
+	   
+	   $trx['buy']= $data->prices->inr->TRX;
+       $trx['sell']= $data->prices->inr->TRX;
+       $response['trx'] = $trx;
+	   
+	   $btt['buy']= $data->prices->inr->BTT;
+       $btt['sell']= $data->prices->inr->BTT;
+       $response['btt'] = $btt;
+	   
+	   }catch(Exception $e){
         echo "koinex issue";
      }
    }elseif(strtolower($response['name']) == "coinsecure"){

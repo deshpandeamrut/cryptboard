@@ -192,12 +192,20 @@
           <td>{{balanceData.koinex.btc_currentValue}}</td>
           <td>{{(balanceData.koinex.btc_difference/balanceData.koinex.btc_total_investments) * 100 | number}}%</td>
         </tr>
-        <tr ng-if="balanceData.koinex.bch_total_investments">
-          <td>BCH</td>
-          <td>{{balanceData.koinex.bch_total_investments}}</td>
-          <td>{{balanceData.koinex.bch_difference}}</td>
-          <td>{{balanceData.koinex.bch_currentValue}}</td>
-          <td>{{(balanceData.koinex.bch_difference/balanceData.koinex.bch_total_investments) * 100 | number}}%</td>
+        <tr ng-if="balanceData.koinex.bchabc_total_investments">
+          <td>BCHABC</td>
+          <td>{{balanceData.koinex.bchabc_total_investments}}</td>
+          <td>{{balanceData.koinex.bchabc_difference}}</td>
+          <td>{{balanceData.koinex.bchabc_currentValue}}</td>
+          <td>{{(balanceData.koinex.bchabc_difference/balanceData.koinex.bchabc_total_investments) * 100 | number}}%</td>
+        </tr>
+		
+		 <tr ng-if="balanceData.koinex.bsv_total_investments">
+          <td>BSV</td>
+          <td>{{balanceData.koinex.bsv_total_investments}}</td>
+          <td>{{balanceData.koinex.bsv_difference}}</td>
+          <td>{{balanceData.koinex.bsv_currentValue}}</td>
+          <td>{{(balanceData.koinex.bsv_difference/balanceData.koinex.bsv_total_investments) * 100 | number}}%</td>
         </tr>
         <tr ng-if="balanceData.koinex.eth_total_investments">
           <td>ETH</td>
@@ -219,6 +227,14 @@
           <td>{{balanceData.koinex.ltc_difference}}</td>
           <td>{{balanceData.koinex.ltc_currentValue}}</td>
           <td>{{(balanceData.koinex.ltc_difference/balanceData.koinex.ltc_total_investments) * 100 | number}}%</td>
+        </tr>
+		
+		<tr ng-if="balanceData.koinex.trx_total_investments">
+          <td>TRX</td>
+          <td>{{balanceData.koinex.trx_total_investments}}</td>
+          <td>{{balanceData.koinex.trx_difference}}</td>
+          <td>{{balanceData.koinex.trx_currentValue}}</td>
+          <td>{{(balanceData.koinex.trx_difference/balanceData.koinex.trx_total_investments) * 100 | number}}%</td>
         </tr>
       </tbody>
     </table>

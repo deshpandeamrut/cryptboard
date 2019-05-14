@@ -66,6 +66,9 @@ $outputData['koinex']['ltc_currentValue']=0;
 $outputData['koinex']['xrp_total_investments']=0;
 $outputData['koinex']['xrp_difference']=0;
 $outputData['koinex']['xrp_currentValue']=0;
+$outputData['koinex']['trx_total_investments']=0;
+$outputData['koinex']['trx_difference']=0;
+$outputData['koinex']['trx_currentValue']=0;
 for ($i=1; $i<count($investment_details) ; $i++) {
     if(trim($investment_details[$i])==""){
         continue;
@@ -101,7 +104,7 @@ for ($i=1; $i<count($investment_details) ; $i++) {
             }
         }
     }else if(stripos($row['name'], "koinex")>-1){
-        $coins=['btc','bch','eth','xrp','ltc'];
+        $coins=['btc','bch','eth','xrp','ltc','btt','bsv','bchabc','trx'];
         $row['exchange_name'] = "Koinex";
         $coinType = explode("-", $row['name'])[1];
         if(in_array($coinType, $coins)){

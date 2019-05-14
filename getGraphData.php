@@ -160,7 +160,16 @@ function getHourlyGraphData($coinType){
             $coinIndex = 3;
         }else if($coinType=="xrp"){
             $coinIndex = 4;
-        }else{
+        }else if($coinType=="bchabc"){
+            $coinIndex = 5;
+        }
+		else if($coinType=="bsv"){
+            $coinIndex = 6;
+        }
+		else if($coinType=="trx"){
+            $coinIndex = 7;
+        }
+		else{
             echo "Coin Type Not supported.";
             return;
         }
